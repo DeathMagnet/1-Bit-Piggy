@@ -1,7 +1,23 @@
-[gd_scene load_steps=7 format=3 uid="uid://mvguxsvie4o3"]
+[gd_scene load_steps=8 format=3 uid="uid://mvguxsvie4o3"]
 
 [ext_resource type="Texture2D" uid="uid://dnbbqljs63htp" path="res://sprites/pig.png" id="1_06s77"]
 [ext_resource type="Script" path="res://piggy.gd" id="1_rv0de"]
+
+[sub_resource type="Animation" id="Animation_cqde7"]
+resource_name = "Idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_rh1ln"]
 length = 0.001
@@ -35,22 +51,6 @@ tracks/0/keys = {
 "values": [1, 2, 0]
 }
 
-[sub_resource type="Animation" id="Animation_cqde7"]
-resource_name = "Idle"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xrn06"]
 _data = {
 "Idle": SubResource("Animation_cqde7"),
@@ -58,8 +58,13 @@ _data = {
 "Walk": SubResource("Animation_6s0pi")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_63p7j"]
+radius = 7.5
+height = 23.0
+
 [node name="Piggy" type="Area2D"]
 z_index = 2
+collision_mask = 2
 script = ExtResource("1_rv0de")
 speed = 50
 
@@ -71,3 +76,10 @@ hframes = 3
 libraries = {
 "": SubResource("AnimationLibrary_xrn06")
 }
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3.5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_63p7j")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

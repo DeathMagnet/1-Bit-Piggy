@@ -36,3 +36,12 @@ func _process(delta: float) -> void:
 	# 	position.y += speed * delta
 	# if Input.is_action_pressed("move_up"):
 	# 	position.y -= speed * delta
+
+
+func _on_area_entered(area:Area2D) -> void:
+	scale *= 1.1
+	area.queue_free()
+
+	# if area.get_groups().find("apple") != -1:
+	# 	scale *= 1.1
+	# 	area.queue_free()

@@ -1,12 +1,73 @@
-[gd_scene load_steps=3 format=3 uid="uid://mvguxsvie4o3"]
+[gd_scene load_steps=7 format=3 uid="uid://mvguxsvie4o3"]
 
 [ext_resource type="Texture2D" uid="uid://dnbbqljs63htp" path="res://sprites/pig.png" id="1_06s77"]
 [ext_resource type="Script" path="res://piggy.gd" id="1_rv0de"]
 
+[sub_resource type="Animation" id="Animation_rh1ln"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_6s0pi"]
+resource_name = "Walk"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1, 2, 0]
+}
+
+[sub_resource type="Animation" id="Animation_cqde7"]
+resource_name = "Idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xrn06"]
+_data = {
+"Idle": SubResource("Animation_cqde7"),
+"RESET": SubResource("Animation_rh1ln"),
+"Walk": SubResource("Animation_6s0pi")
+}
+
 [node name="Piggy" type="Area2D"]
+z_index = 2
 script = ExtResource("1_rv0de")
 speed = 50
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_06s77")
 hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xrn06")
+}

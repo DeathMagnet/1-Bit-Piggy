@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://mvguxsvie4o3"]
+[gd_scene load_steps=3 format=3 uid="uid://mvguxsvie4o3"]
 
 [ext_resource type="Texture2D" uid="uid://dnbbqljs63htp" path="res://sprites/pig.png" id="1_06s77"]
+[ext_resource type="Script" path="res://piggy.gd" id="1_rv0de"]
 
 [node name="Piggy" type="Area2D"]
+script = ExtResource("1_rv0de")
+speed = 50
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_06s77")
